@@ -80,11 +80,11 @@
   </head>
   <body>
 
-    @include('Frontend.Layout.navbar')
+    {{-- @include('Frontend.Layout.navbar') --}}
 
     @yield('content')
 
-    @include('Frontend.Layout.footer')
+    {{-- @include('Frontend.Layout.footer') --}}
 
     <script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>

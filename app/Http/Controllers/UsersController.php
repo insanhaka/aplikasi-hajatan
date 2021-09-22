@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Roles;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\DataTables;
 
 class UsersController extends Controller
 {
@@ -287,6 +288,65 @@ class UsersController extends Controller
         $user->is_active = $request->is_active;
 
         $process = $user->save();
+        if ($process) {
+            return redirect(url('/dapur/super/view'))->with('updated','Data Berhasil Disimpan');
+        } else {
+            return back()->with('error','Data Gagal Disimpan');
+        }
+    }
+
+    public function getUserServerSide()
+    {
+        $data = User::query();
+        return Datatables::of($data)
+            // ->orderColumn('owner', function ($query, $order) {
+            //     $query->orderBy('owner', 'asc');
+            // })
+            ->addColumn('name', function ($data) {
+                $name = '<td>'.$data->name.'</td>';
+                return $name;
+            })
+            ->addColumn('username', function ($data) {
+                $username = '<td>'.$data->username.'</td>';
+                return $username;
+            })
+            ->addColumn('email', function ($data) {
+                $email = '<td>'.$data->email.'</td>';
+                return $email;
+            })
+            ->addColumn('role', function ($data) {
+                if ($data->roles_id == null) {
+                    $role = '<td> ----- </td>';
+                }else {
+                    $role = '<td>'.$data->role->name.'</td>';
+                }
+                return $role;
+            })
+            ->addColumn('photo', function ($data) {
+                if ($data->photo == null) {
+                    $photo = '<td> <img src="'.asset('assets/img/no-image.jpg').'" class="img-fluid" alt="Responsive image" width="30"> </td>';
+                }else {
+                    $photo = '<td> <img src="'.asset('profile_pictures/'.$data->photo).'" class="img-fluid" alt="Responsive image" width="30"> </td>';
+                }
+                return $photo;
+            })
+            ->addColumn('active', function ($data) {
+                if ($data->is_active == 0) {
+                    $active = '<td> <a class="btn btn-secondary btn-sm" style="margin-right: 10px;" href="'.url('/dapur/super/activation/?id='.$data->id.'&is_active=1').'">OFF</a></td>';
+                }else {
+                    $active = '<td> <a class="btn btn-success btn-sm" style="margin-right: 20px;" href="'.url('/dapur/super/activation/?id='.$data->id.'&is_active=0').'">ON</a> </td>';
+                }
+                return $active;
+            })
+            ->addColumn('action', function ($data) {
+                $action = '<td>
+                                <a style="margin-right: 20px;" href="'.url('/dapur').'/super/view/'.$data->id.'/edit"><i class="fa fa-edit text-primary" style="font-size: 21px;"></i></a>
+                                <a style="margin-right: 10px;" href="'.url('/dapur').'/super/view/'.$data->id.'/delete"><i class="fa fa-trash text-primary" style="font-size: 21px;"></i></a>
+                            </td>';
+                return $action;
+            })
+            ->rawColumns(['name', 'username','email', 'role', 'photo', 'active', 'action'])
+            ->make(true);
     }
 
 }

@@ -1,4 +1,4 @@
-@extends('Auth.layout')
+@extends('Frontend.UserAuth.layout')
 
 @section('css')
 
@@ -8,19 +8,14 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-t-50 p-b-90">
-            <form class="login100-form validate-form flex-sb flex-w" action="/postsignup" method="POST">
+            <form class="login100-form validate-form flex-sb flex-w" action="/postdaftar" method="POST">
                 @csrf
                 <span class="login100-form-title p-b-51">
-                    Sign Up
+                    Daftar
                 </span>
 
-                <div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required" style="visibility: hidden; position: absolute;">
-                    <input class="input100" type="text" id="is_active" name="is_active" value="0">
-                    <span class="focus-input100"></span>
-                </div>
-
                 <div class="wrap-input100 validate-input m-b-16" data-validate = "Name is required">
-                    <input class="input100" type="text" id="name" name="name" placeholder="Your name">
+                    <input class="input100" type="text" id="name" name="name" placeholder="Nama">
                     <span class="focus-input100"></span>
                 </div>
 
@@ -63,14 +58,14 @@
     @if ($message = Session::get('success'))
             swal({
                 title: "Registrasi berhasil !",
-                text: "Data anda akan kami verifikasi terlebih dahulu.",
+                text: "Silahkan login untuk akses selanjutnya.",
                 icon: "success",
                 button: "Oke",
                 closeOnClickOutside: false,
             })
             .then((value) => {
                 if(value == true){
-                    window.location.href = '/login';
+                    window.location.href = '/masuk';
                 }
             });
     @endif

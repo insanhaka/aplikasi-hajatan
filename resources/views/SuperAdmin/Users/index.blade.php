@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="datatable" class="table table-striped table-bordered display responsive nowrap" style="width:100%">
+            <table id="user-datatable" class="table table-striped table-bordered display responsive nowrap" style="width:100%">
                 <thead class="bg-primary" style="color: #ffff;">
                     <tr>
                         <th>Name</th>
@@ -33,7 +33,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $user)
+                    <tr>
+
+                    </tr>
+                    {{-- @foreach ($data as $user)
                     <tr>
                         <td>{!!$user->name!!}</td>
                         <td>{!!$user->username!!}</td>
@@ -68,7 +71,7 @@
                             <a style="margin-right: 10px;" href="{{url()->current().'/'.$user->id.'/delete'}}"><i class="fa fa-trash text-primary" style="font-size: 21px;"></i></a>
                         </td>
                     </tr>
-                    @endforeach
+                    @endforeach --}}
                 </tbody>
             </table>
         </div>
@@ -152,5 +155,34 @@
     })
 </script>
 @endforeach
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var tablebusiness = $('#user-datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            "language": {
+                "paginate": {
+                "previous": "&lt",
+                "next": "&gt"
+                }
+            },
+            ajax: "{!!url('/dapur')!!}" + "/super/user-serverside",
+            order: [
+                [1, 'asc']
+            ],
+            columns: [
+                // {data: 'checkbox',name: 'checkbox', searchable: false, orderable: false},
+                {data: 'name',name: 'name'},
+                {data: 'username',name: 'username'},
+                {data: 'email',name: 'email'},
+                {data: 'role',name: 'role'},
+                {data: 'photo',name: 'photo'},
+                {data: 'active',name: 'active'},
+                {data: 'action',name: 'action'},
+            ]
+        });
+    });
+</script>
 
 @endsection

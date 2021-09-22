@@ -1,4 +1,4 @@
-@extends('Auth.layout')
+@extends('Frontend.UserAuth.layout')
 
 @section('css')
 
@@ -8,7 +8,7 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-t-50 p-b-90">
-            <form class="login100-form validate-form flex-sb flex-w" action="/postlogin" method="POST">
+            <form class="login100-form validate-form flex-sb flex-w" action="/postmasuk" method="POST">
                 @csrf
                 <span class="login100-form-title p-b-51">
                     Hai, Selamat Datang
@@ -38,7 +38,7 @@
                             <p>Belum memiliki akun?</p>
                         </div>
                         <div class="col-md-4">
-                            <a href="/signup"><p style="color: #546de5; font-weight: bold;">Daftar Disini</p></a>
+                            <a href="/daftar"><p style="color: #546de5; font-weight: bold;">Daftar Disini</p></a>
                         </div>
                     </div>
                 </div>

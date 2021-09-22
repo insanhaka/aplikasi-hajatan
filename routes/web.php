@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 //===============FRONTEND ROUTE===============//
 use App\Http\Controllers\FrontlandingController;
-use App\Http\Controllers\FrontAuthController;
 
 //===============BACKEND ROUTE================//
 use App\Http\Controllers\AuthorizeController;
@@ -22,8 +21,6 @@ use App\Http\Controllers\Tema_UndanganController;
 //=========================FRONTEND ROUTE=================================//
 
 Route::get('/', [FrontlandingController::class, 'index'])->name('landing');
-Route::get('/masuk', [FrontAuthController::class, 'login'])->name('masuk');
-Route::get('/daftar', [FrontAuthController::class, 'signup'])->name('daftar');
 
 //=========================BACKEND ROUTE=================================//
 
@@ -47,7 +44,9 @@ Route::group(['prefix' => 'dapur', 'middleware' => 'auth'], function () {
     Route::get('/super/view/{id}/edit', [UsersController::class, 'edit']);
     Route::post('/super/view/{id}/update', [UsersController::class, 'update']);
     Route::get('/super/view/{id}/delete', [UsersController::class, 'delete']);
-    Route::post('/super/activation', [UsersController::class, 'activation']);
+    Route::get('/super/activation', [UsersController::class, 'activation']);
+
+    Route::get('/super/user-serverside', [UsersController::class, 'getUserServerSide']);
 
     Route::get('/super/roles', [RolesController::class, 'view'])->name('roles');
     Route::get('/super/roles/add', [RolesController::class, 'add']);

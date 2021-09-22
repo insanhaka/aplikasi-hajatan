@@ -16,7 +16,7 @@
         "laravel/passport": "^10.1",
         "laravel/tinker": "^2.0",
         "spatie/laravel-permission": "^3.17",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
