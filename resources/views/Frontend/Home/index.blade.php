@@ -15,14 +15,14 @@
 
 {{-- Header Section start --}}
 <section class="headernya">
-    <div class="container">
+    <div class="container" style="padding-top: 5%">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <img src="{{asset('assets/img/header-acara-01.png')}}" class="img-fluid" alt="...">
                 <br>
                 <h1 class="text-center">Wedding Digital Invitation</h1>
                 <center>
-                <a class="btn btn-primary" href="/masuk-dapur" role="button">Login</a>
+                <a class="btn btn-primary btn-block" href="/masuk-dapur" role="button">Login</a>
                 </center>
             </div>
         </div>

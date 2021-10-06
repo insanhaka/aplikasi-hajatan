@@ -26,7 +26,7 @@ class Api_AuthorizeController extends Controller
                     'message' => 'success',
                     'pesan' => 'Selamat Datang '.$user->name,
                     'data' => $user,
-                    'token' => $token
+                    'token' => $user->name.'#'.$user->id.'#'.$token
                 ]);
             }
             else

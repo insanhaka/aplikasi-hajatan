@@ -4,13 +4,41 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tema_Undangan;
+use Yajra\DataTables\DataTables;
 
 class Tema_UndanganController extends Controller
 {
+    public function getDataTemaServerSide()
+    {
+        $data = Tema_Undangan::orderBy('id', 'DESC');
+        return Datatables::of($data)
+            ->addColumn('code', function ($data) {
+                $code = '<td>'.$data->code.'</td>';
+                return $code;
+            })
+            ->addColumn('name', function ($data) {
+                $name = '<td>'.$data->name.'</td>';
+                return $name;
+            })
+            ->addColumn('view', function ($data) {
+                $view = '<td> <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tema'.$data->id.'">Lihat</button> </td>';
+                return $view;
+            })
+            ->addColumn('action', function ($data) {
+                $action = '<td>
+                                <a style="margin-right: 20px;" href="'.url('/dapur').'/tema-undangan/edit/'.$data->id.'"><i class="fa fa-edit text-primary" style="font-size: 21px;"></i></a>
+                                <a style="margin-right: 10px;" href="'.url('/dapur').'/tema-undangan/delete/'.$data->id.'"><i class="fa fa-trash text-primary" style="font-size: 21px;"></i></a>
+                            </td>';
+                return $action;
+            })
+            ->rawColumns(['code', 'name', 'view', 'action'])
+            ->make(true);
+    }
+
     public function view()
     {
-        $undangan = Tema_Undangan::orderBy('id', 'DESC')->get();
-        return view('Backend.Tema_Undangan.index', ['data' => $undangan]);
+        $tema = Tema_Undangan::all();
+        return view('Backend.Tema_Undangan.index', ['tema_undangan' => $tema]);
     }
 
     public function add()
@@ -23,21 +51,20 @@ class Tema_UndanganController extends Controller
         // dd($request->all());
 
         $create = new Tema_Undangan;
-        $create->title = $request->title;
-        $create->description = $request->description;
-        $create->is_active = 1;
+        $create->name = $request->name;
+        $create->code = $request->code;
 
         // menyimpan data file yang diupload ke variabel $file
-        $file = $request->file('picture');
+        $file = $request->file('thumbnail');
         if($file == null){
             $nama_file = "";
-            $create->picture = $nama_file;
+            $create->thumbnail = $nama_file;
         }else{
             $nama_file = time()."_".$file->getClientOriginalName();
             // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'tema_undangan';
             $file->move($tujuan_upload,$nama_file);
-            $create->picture = $nama_file;
+            $create->thumbnail = $nama_file;
         }
 
         $process = $create->save();
@@ -57,13 +84,13 @@ class Tema_UndanganController extends Controller
 
     public function update(Request $request, $id)
     {
-        $file = $request->file('picture');
+        $file = $request->file('thumbnail');
 
         $content = Tema_Undangan::findOrFail($id);
 
         if($file == null){
-            $content->title = $request->title;
-            $content->description = $request->description;
+            $content->name = $request->name;
+            $content->code = $request->code;
             $process = $content->save();
             if ($process) {
                 return redirect(url('/dapur/tema-undangan'))->with('updated','Data Berhasil Disimpan');
@@ -75,9 +102,9 @@ class Tema_UndanganController extends Controller
             // isi dengan nama folder tempat kemana file diupload
             $tujuan_upload = 'tema_undangan';
             $file->move($tujuan_upload,$nama_file);
-            $content->title = $request->title;
-            $content->description = $request->description;
-            $content->picture = $nama_file;
+            $content->name = $request->name;
+            $content->code = $request->code;
+            $content->thumbnail = $nama_file;
             $process = $content->save();
             if ($process) {
                 return redirect(url('/dapur/tema-undangan'))->with('updated','Data Berhasil Disimpan');
@@ -98,16 +125,5 @@ class Tema_UndanganController extends Controller
         } else {
             return back()->with('warning','Data Gagal Dihapus');
         }
-    }
-
-    public function activation(Request $request)
-    {
-        $id = $request->id;
-        // dd($id);
-
-        $content = Tema_Undangan::findOrFail($id);
-        $content->is_active = $request->is_active;
-
-        $process = $content->save();
     }
 }

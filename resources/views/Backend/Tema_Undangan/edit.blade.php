@@ -23,25 +23,25 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Judul</label>
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Judul Berita" required value="{!!$data->title!!}">
+                                <label for="exampleFormControlInput1">Kode Produk</label>
+                                <input type="text" class="form-control" id="code" name="code" placeholder="Kode tema undangan" required value="{!!$data->code!!}">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Deskripsi</label>
-                                <textarea class="form-control" id="editor" name="description" rows="3">{!!$data->description!!}</textarea>
+                                <label for="exampleFormControlInput1">Nama</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Nama tema undangan" required value="{!!$data->name!!}">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleForm21">Gambar Sampul Berita</label>
+                                <label for="exampleForm21">Gambar Tema Undangan</label>
                                 <div class="file-loading">
-                                    <input id="input-b6" name="picture" type="file">
+                                    <input id="input-b6" name="thumbnail" type="file">
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
             dropZoneEnabled: false,
             maxFileCount: 10,
             initialPreview: [
-                "{{asset('tema_undangan/'.$data->picture)}}"
+                "{{asset('tema_undangan/'.$data->thumbnail)}}"
             ],
             initialPreviewAsData: true,
             initialPreviewFileType: 'image',

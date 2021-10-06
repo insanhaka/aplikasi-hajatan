@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-class Tema_Undangan extends Model
+class Contoh_Undangan extends Model
 {
     use HasFactory;
 
-    protected $table = 'invitation_themes';
+    protected $table = 'fake_invitations';
 
     protected $guarded = [];
     public static function boot()
@@ -24,9 +23,9 @@ class Tema_Undangan extends Model
         });
     }
 
-    public function fakeinvitation()
+    public function tema()
     {
-        return $this->hasMany('App\Models\Contoh_Undangan', 'id', 'theme_id');
+        return $this->belongsTo('App\Models\Tema_Undangan', 'theme_id', 'id');
     }
 
 }

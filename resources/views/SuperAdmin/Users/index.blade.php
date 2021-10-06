@@ -34,44 +34,8 @@
                 </thead>
                 <tbody>
                     <tr>
-
+                        {{-- Datatables Serverside Handle --}}
                     </tr>
-                    {{-- @foreach ($data as $user)
-                    <tr>
-                        <td>{!!$user->name!!}</td>
-                        <td>{!!$user->username!!}</td>
-                        <td>{!!$user->email!!}</td>
-                        @if ($user->roles_id == null)
-                        <td>----</td>
-                        @else
-                        <td>{!!$user->role->name!!}</td>
-                        @endif
-                        @if ($user->photo == null)
-                        <td> <img src="{{asset('assets/img/no-image.jpg')}}" class="img-fluid" alt="Responsive image" width="50"> </td>
-                        @else
-                        <td><img src="{{asset('profile_pictures/'.$user->photo)}}" class="img-fluid" alt="Responsive image" width="50"></td>
-                        @endif
-                        @if ($user->is_active == 0)
-                        <td>
-                            <label class="custom-toggle">
-                                <input id="{!!$user->id!!}" type="checkbox">
-                                <span class="custom-toggle-slider rounded-circle" data-label-off="OFF" data-label-on="ON" ></span>
-                            </label>
-                        </td>
-                        @else
-                        <td>
-                            <label class="custom-toggle">
-                                <input id="{!!$user->id!!}" type="checkbox" checked>
-                                <span class="custom-toggle-slider rounded-circle" data-label-off="OFF" data-label-on="ON" ></span>
-                            </label>
-                        </td>
-                        @endif
-                        <td>
-                            <a style="margin-right: 20px;" href="{{url()->current().'/'.$user->id.'/edit'}}"><i class="fa fa-edit text-primary" style="font-size: 21px;"></i></a>
-                            <a style="margin-right: 10px;" href="{{url()->current().'/'.$user->id.'/delete'}}"><i class="fa fa-trash text-primary" style="font-size: 21px;"></i></a>
-                        </td>
-                    </tr>
-                    @endforeach --}}
                 </tbody>
             </table>
         </div>

@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="datatable" class="table table-striped table-bordered display responsive nowrap" style="width:100%">
+            <table id="role-datatable" class="table table-striped table-bordered display responsive nowrap" style="width:100%">
                 <thead class="bg-primary" style="color: #ffff;">
                     <tr>
                         <th>Name</th>
@@ -28,7 +28,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $role)
+                    <tr>
+                        {{-- Role Server Side Hadle --}}
+                    </tr>
+                    {{-- @foreach ($data as $role)
                     <tr>
                         <td>{!!$role->name!!}</td>
                         <td>
@@ -36,7 +39,7 @@
                             <a style="margin-right: 10px;" href="{{url()->current().'/'.$role->id.'/delete'}}"><i class="fa fa-trash text-primary" style="font-size: 21px;"></i></a>
                         </td>
                     </tr>
-                    @endforeach
+                    @endforeach --}}
                 </tbody>
             </table>
         </div>
@@ -87,6 +90,30 @@
                         position: 'topRight'
                     });
     @endif
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var tablebusiness = $('#role-datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            "language": {
+                "paginate": {
+                "previous": "&lt",
+                "next": "&gt"
+                }
+            },
+            ajax: "{!!url('/dapur')!!}" + "/super/role-serverside",
+            order: [
+                [1, 'asc']
+            ],
+            columns: [
+                // {data: 'checkbox',name: 'checkbox', searchable: false, orderable: false},
+                {data: 'name',name: 'name'},
+                {data: 'action',name: 'action'},
+            ]
+        });
+    });
 </script>
 
 @endsection

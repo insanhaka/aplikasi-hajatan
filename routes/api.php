@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api_AuthorizeController;
+use App\Http\Controllers\Api_UserController;
 use App\Http\Controllers\Api_UndanganController;
 
 /*
@@ -16,11 +17,15 @@ use App\Http\Controllers\Api_UndanganController;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::post('/postlogin', [Api_AuthorizeController::class, 'postlogin']);
 Route::post('/postsignup', [Api_AuthorizeController::class, 'postsignup']);
 
-Route::get('/tema-undangan', [Api_UndanganController::class, 'temaundangan']);
+Route::get('/simple-data-user/{id}', [Api_UserController::class, 'simpledatauser']);
+
+Route::group(['middleware' => 'auth:api'], function(){
+
+    Route::get('/tema-undangan', [Api_UndanganController::class, 'temaundangan']);
+
+ });
+
+

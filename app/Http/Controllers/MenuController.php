@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Menu;
+use Yajra\DataTables\DataTables;
 
 class MenuController extends Controller
 {
@@ -107,5 +108,52 @@ class MenuController extends Controller
         $menus->is_active = $request->is_active;
 
         $process = $menus->save();
+        if ($process) {
+            return redirect(url('/dapur/super/menu'))->with('updated','Data Berhasil Disimpan');
+        } else {
+            return back()->with('error','Data Gagal Disimpan');
+        }
+    }
+
+    public function getMenuServerSide()
+    {
+        $data = Menu::query();
+        return Datatables::of($data)
+        // ->orderColumn('owner', function ($query, $order) {
+        //     $query->orderBy('owner', 'asc');
+        // })
+        ->addColumn('name', function ($data) {
+            $name = '<td>'.$data->name.'</td>';
+            return $name;
+        })
+        ->addColumn('uri', function ($data) {
+            $uri = '<td>'.$data->uri.'</td>';
+            return $uri;
+        })
+        ->addColumn('icon', function ($data) {
+            if ($data->icon == null) {
+                $icon = '<td> <img src="'.asset('assets/img/no-image.jpg').'" class="img-fluid" alt="Responsive image" width="30"> </td>';
+            }else {
+                $icon = '<td> <img src="'.asset('menus_icon/'.$data->icon).'" class="img-fluid" alt="Responsive image" width="30"> </td>';
+            }
+            return $icon;
+        })
+        ->addColumn('active', function ($data) {
+            if ($data->is_active == 0) {
+                $active = '<td> <a class="btn btn-secondary btn-sm" style="margin-right: 10px;" href="'.url('/dapur/menu/activation/?id='.$data->id.'&is_active=1').'"><i class="fa fa-toggle-off" aria-hidden="true"></i> OFF</a></td>';
+            }else {
+                $active = '<td> <a class="btn btn-success btn-sm" style="margin-right: 20px;" href="'.url('/dapur/menu/activation/?id='.$data->id.'&is_active=0').'"><i class="fa fa-toggle-on" aria-hidden="true"></i> ON</a> </td>';
+            }
+            return $active;
+        })
+        ->addColumn('action', function ($data) {
+            $action = '<td>
+                            <a style="margin-right: 20px;" href="'.url('/dapur').'/super/menu/'.$data->id.'/edit"><i class="fa fa-edit text-primary" style="font-size: 21px;"></i></a>
+                            <a style="margin-right: 10px;" href="'.url('/dapur').'/super/menu/'.$data->id.'/delete"><i class="fa fa-trash text-primary" style="font-size: 21px;"></i></a>
+                        </td>';
+            return $action;
+        })
+        ->rawColumns(['name', 'uri', 'icon', 'active', 'action'])
+        ->make(true);
     }
 }

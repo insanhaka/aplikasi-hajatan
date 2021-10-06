@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="datatable" class="table table-striped table-bordered display responsive nowrap" style="width:100%">
+            <table id="menu-datatable" class="table table-striped table-bordered display responsive nowrap" style="width:100%">
                 <thead class="bg-primary" style="color: #ffff;">
                     <tr>
                         <th>Name</th>
@@ -31,36 +31,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $menu)
                     <tr>
-                        <td>{!!$menu->name!!}</td>
-                        <td>{!!$menu->uri!!}</td>
-                        @if ($menu->icon == null)
-                        <td> <img src="{{asset('assets/img/no-image.jpg')}}" class="img-fluid" alt="Responsive image" width="50"> </td>
-                        @else
-                        <td><img src="{{asset('menus_icon/'.$menu->icon)}}" class="img-fluid" alt="Responsive image" width="50"></td>
-                        @endif
-                        @if ($menu->is_active == 0)
-                        <td>
-                            <label class="custom-toggle">
-                                <input id="{!!$menu->id!!}" type="checkbox">
-                                <span class="custom-toggle-slider rounded-circle" data-label-off="OFF" data-label-on="ON" ></span>
-                            </label>
-                        </td>
-                        @else
-                        <td>
-                            <label class="custom-toggle">
-                                <input id="{!!$menu->id!!}" type="checkbox" checked>
-                                <span class="custom-toggle-slider rounded-circle" data-label-off="OFF" data-label-on="ON" ></span>
-                            </label>
-                        </td>
-                        @endif
-                        <td>
-                            <a style="margin-right: 20px;" href="{{url()->current().'/'.$menu->id.'/edit'}}"><i class="fa fa-edit text-primary" style="font-size: 21px;"></i></a>
-                            <a style="margin-right: 10px;" href="{{url()->current().'/'.$menu->id.'/delete'}}"><i class="fa fa-trash text-primary" style="font-size: 21px;"></i></a>
-                        </td>
+                        {{-- Menu Server Side Handle --}}
                     </tr>
-                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -113,36 +86,31 @@
     @endif
 </script>
 
-@foreach ($data as $cek)
-<script>
-    $(function() {
-      $('#{!! $cek->id !!}').change(function(event) {
-        var status = ($(this).prop('checked')) ? '1' : '0';
-        var id = event.target.id;
-        var is_active = status;
-        // console.log(id);
-        // console.log(status);
-        axios.post('/dapur/menu/activation', {
-            is_active: is_active,
-            id: id
-        })
-        .then(function (response) {
-            iziToast.success({
-                title: 'Success',
-                message: 'Proses Berhasil',
-                position: 'topRight'
-            });
-        })
-        .catch(function (error) {
-            iziToast.warning({
-                title: 'Upps !',
-                message: 'Proses Gagal',
-                position: 'topRight'
-            });
+<script type="text/javascript">
+    $(document).ready(function() {
+        var tablebusiness = $('#menu-datatable').DataTable({
+            processing: true,
+            serverSide: true,
+            "language": {
+                "paginate": {
+                "previous": "&lt",
+                "next": "&gt"
+                }
+            },
+            ajax: "{!!url('/dapur')!!}" + "/super/menu-serverside",
+            order: [
+                [1, 'asc']
+            ],
+            columns: [
+                // {data: 'checkbox',name: 'checkbox', searchable: false, orderable: false},
+                {data: 'name',name: 'name'},
+                {data: 'uri',name: 'uri'},
+                {data: 'icon',name: 'icon'},
+                {data: 'active',name: 'active'},
+                {data: 'action',name: 'action'},
+            ]
         });
-      })
-    })
+    });
 </script>
-@endforeach
 
 @endsection

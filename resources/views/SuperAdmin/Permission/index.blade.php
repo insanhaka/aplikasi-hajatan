@@ -24,6 +24,7 @@
                 <thead class="bg-primary" style="color: #ffff;">
                     <tr>
                         <th>Roles Name</th>
+                        <th>Permission For Role</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -31,14 +32,10 @@
                     @foreach ($rol as $role)
                     <tr>
                         <td>{!!$role->name!!}</td>
-                        {{-- <td>
-                            <a class="btn btn-success btn-sm" href="{{url()->current().'/'.$role->id.'/show'}}" role="button">View</a>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="{{url()->current().'/'.$role->id.'/show'}}"><i class="fa fa-eye"></i> View</a>
                         </td>
                         <td>
-                            <a style="margin-right: 10px;" href="{{url()->current().'/'.$role->id.'/delete'}}"><i class="fa fa-trash text-primary" style="font-size: 21px;"></i></a>
-                        </td> --}}
-                        <td>
-                            <a style="margin-right: 20px;" href="{{url()->current().'/'.$role->id.'/show'}}"><i class="fa fa-eye text-primary" style="font-size: 21px;"></i></a>
                             <a style="margin-right: 10px;" href="{{url()->current().'/'.$role->id.'/delete'}}"><i class="fa fa-trash text-primary" style="font-size: 21px;"></i></a>
                         </td>
                     </tr>

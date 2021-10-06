@@ -12,10 +12,10 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
-                    <h2 class="text-primary">Tema Undangan</h2>
+                    <h2 class="text-primary">Data Contoh Undangan</h2>
                 </div>
                 <div class="col-md-6 text-right">
-                    <a class="btn btn-primary" href="/dapur/tema-undangan/add" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah</a>
+                    <a class="btn btn-primary" href="/dapur/contoh-undangan/add" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah</a>
                 </div>
             </div>
         </div>
@@ -24,12 +24,13 @@
     <div class="card">
         <br>
         <div class="card-body mt-3">
-            <table id="tema-datatable" class="table table-striped table-bordered display responsive nowrap" style="width:100%">
+            <table id="contoh-datatable" class="table table-striped table-bordered display responsive nowrap" style="width:100%">
                 <thead class="bg-primary" style="color: #ffff;">
                     <tr>
-                        <th>Code</th>
-                        <th>Nama</th>
-                        <th>Detail</th>
+                        <th>Wedding</th>
+                        <th>Theme</th>
+                        <th>Uri</th>
+                        <th>Is Active</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -45,7 +46,7 @@
 </div>
 
 <!-- Modal -->
-@foreach ($tema_undangan as $item )
+@foreach ($contoh_undangan as $item )
 <div class="modal fade" id="tema{!!$item->id!!}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -78,7 +79,7 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        $("#tema-undangan").addClass("active");
+        $("#contoh-undangan").addClass("active");
     });
 </script>
 
@@ -121,7 +122,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        var tablebusiness = $('#tema-datatable').DataTable({
+        var tablebusiness = $('#contoh-datatable').DataTable({
             processing: true,
             serverSide: true,
             "language": {
@@ -130,7 +131,7 @@
                 "next": "&gt"
                 }
             },
-            ajax: "{!!url('/dapur')!!}" + "/tema/getdatatema-serverside",
+            ajax: "{!!url('/dapur')!!}" + "/contoh/getdatacontoh-serverside",
             order: [
                 [1, 'asc']
             ],

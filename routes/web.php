@@ -14,6 +14,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\Tema_UndanganController;
+use App\Http\Controllers\Contoh_UndanganController;
 
 
 
@@ -45,7 +46,6 @@ Route::group(['prefix' => 'dapur', 'middleware' => 'auth'], function () {
     Route::post('/super/view/{id}/update', [UsersController::class, 'update']);
     Route::get('/super/view/{id}/delete', [UsersController::class, 'delete']);
     Route::get('/super/activation', [UsersController::class, 'activation']);
-
     Route::get('/super/user-serverside', [UsersController::class, 'getUserServerSide']);
 
     Route::get('/super/roles', [RolesController::class, 'view'])->name('roles');
@@ -54,6 +54,7 @@ Route::group(['prefix' => 'dapur', 'middleware' => 'auth'], function () {
     Route::get('/super/roles/{id}/edit', [RolesController::class, 'edit']);
     Route::post('/super/roles/{id}/update', [RolesController::class, 'update']);
     Route::get('/super/roles/{id}/delete', [RolesController::class, 'delete']);
+    Route::get('/super/role-serverside', [RolesController::class, 'getRoleServerSide']);
 
     Route::get('/super/permission', [PermissionController::class, 'view'])->name('permission');
     Route::get('/super/permission/add', [PermissionController::class, 'add']);
@@ -70,6 +71,7 @@ Route::group(['prefix' => 'dapur', 'middleware' => 'auth'], function () {
     Route::post('/super/menu/{id}/update', [MenuController::class, 'update']);
     Route::get('/super/menu/{id}/delete', [MenuController::class, 'delete']);
     Route::post('/menu/activation', [MenuController::class, 'activation']);
+    Route::get('/super/menu-serverside', [MenuController::class, 'getMenuServerSide']);
 
     //Route Untuk Admin Lain (Sesuai Menu)
 
@@ -87,7 +89,15 @@ Route::group(['prefix' => 'dapur', 'middleware' => 'auth'], function () {
     Route::get('/tema-undangan/edit/{id}', [Tema_UndanganController::class, 'edit']);
     Route::post('/tema-undangan/update/{id}', [Tema_UndanganController::class, 'update']);
     Route::get('/tema-undangan/delete/{id}', [Tema_UndanganController::class, 'delete']);
-    Route::post('/tema-undangan/activation', [Tema_UndanganController::class, 'activation']);
+    Route::get('/tema/getdatatema-serverside', [Tema_UndanganController::class, 'getDataTemaServerSide']);
+
+    Route::get('/contoh-undangan', [Contoh_UndanganController::class, 'view'])->name('contoh-undangan');
+    Route::get('/contoh-undangan/add', [Contoh_UndanganController::class, 'add']);
+    Route::post('/contoh-undangan/create', [Contoh_UndanganController::class, 'create']);
+    Route::get('/contoh-undangan/edit/{id}', [Contoh_UndanganController::class, 'edit']);
+    Route::post('/contoh-undangan/update/{id}', [Contoh_UndanganController::class, 'update']);
+    Route::get('/contoh-undangan/delete/{id}', [Contoh_UndanganController::class, 'delete']);
+    Route::get('/contoh/getdatacontoh-serverside', [Contoh_UndanganController::class, 'getDataContohServerSide']);
 
 
     // Route::post('/getRegenciesFromProvince', function (Request $request) {
