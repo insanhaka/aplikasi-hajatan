@@ -20,9 +20,11 @@ use App\Http\Controllers\Api_UndanganController;
 Route::post('/postlogin', [Api_AuthorizeController::class, 'postlogin']);
 Route::post('/postsignup', [Api_AuthorizeController::class, 'postsignup']);
 
-Route::get('/simple-data-user/{id}', [Api_UserController::class, 'simpledatauser']);
+Route::post('/googlesignup', [Api_AuthorizeController::class, 'googlesignup']);
 
 Route::group(['middleware' => 'auth:api'], function(){
+
+    Route::get('/simple-data-user/{email}', [Api_UserController::class, 'simpledatauser']);
 
     Route::get('/tema-undangan', [Api_UndanganController::class, 'temaundangan']);
 

@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class Api_UserController extends Controller
 {
-    public function simpledatauser($id)
+    public function simpledatauser($email)
     {
         $user = DB::table('users')
-                ->where('id', '=', $id)
+                ->where('email', '=', $email)
                 ->select('name', 'username', 'email')
                 ->first();
 
