@@ -15,6 +15,8 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\Tema_UndanganController;
 use App\Http\Controllers\Contoh_UndanganController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\FeatureController;
 
 
 
@@ -98,6 +100,24 @@ Route::group(['prefix' => 'dapur', 'middleware' => 'auth'], function () {
     Route::post('/contoh-undangan/update/{id}', [Contoh_UndanganController::class, 'update']);
     Route::get('/contoh-undangan/delete/{id}', [Contoh_UndanganController::class, 'delete']);
     Route::get('/contoh/getdatacontoh-serverside', [Contoh_UndanganController::class, 'getDataContohServerSide']);
+
+    Route::get('/package', [PackageController::class, 'view'])->name('package');
+    Route::get('/package/add', [PackageController::class, 'add']);
+    Route::post('/package/create', [PackageController::class, 'create']);
+    Route::get('/package/edit/{id}', [PackageController::class, 'edit']);
+    Route::post('/package/update/{id}', [PackageController::class, 'update']);
+    Route::get('/package/delete/{id}', [PackageController::class, 'delete']);
+    Route::get('/package/features/{id}', [PackageController::class, 'features']);
+    Route::post('/savefeature', [PackageController::class, 'save_feature'])->name('savefeature');
+    Route::get('/package/package-serverside', [PackageController::class, 'packageServerSide']);
+
+    Route::get('/feature', [FeatureController::class, 'view'])->name('feature');
+    Route::get('/feature/add', [FeatureController::class, 'add']);
+    Route::post('/feature/create', [FeatureController::class, 'create']);
+    Route::get('/feature/edit/{id}', [FeatureController::class, 'edit']);
+    Route::post('/feature/update/{id}', [FeatureController::class, 'update']);
+    Route::get('/feature/delete/{id}', [FeatureController::class, 'delete']);
+    Route::get('/feature/feature-serverside', [FeatureController::class, 'featureServerSide']);
 
 
     // Route::post('/getRegenciesFromProvince', function (Request $request) {
