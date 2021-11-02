@@ -12,18 +12,18 @@ class FeatureController extends Controller
     public function view()
     {
         $feature = Feature::all();
-        return view('SuperAdmin.Feature.index', ['package' => $feature]);
+        return view('Backend.Feature.index', ['package' => $feature]);
     }
 
     public function add()
     {
-        return view('SuperAdmin.Feature.create');
+        return view('Backend.Feature.create');
     }
 
     public function edit($id)
     {
         $feature = Feature::findOrFail($id);
-        return view('SuperAdmin.Feature.edit', ['data' => $feature]);
+        return view('Backend.Feature.edit', ['data' => $feature]);
     }
 
     public function update(Request $request, $id)

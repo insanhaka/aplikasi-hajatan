@@ -14,12 +14,12 @@ class PackageController extends Controller
     public function view()
     {
         $package = Package::all();
-        return view('SuperAdmin.Package.index', ['package' => $package]);
+        return view('Backend.Package.index', ['package' => $package]);
     }
 
     public function add()
     {
-        return view('SuperAdmin.Package.create');
+        return view('Backend.Package.create');
     }
 
     public function create(Request $request)
@@ -54,7 +54,7 @@ class PackageController extends Controller
     public function edit($id)
     {
         $package = Package::findOrFail($id);
-        return view('SuperAdmin.Package.edit', ['data' => $package]);
+        return view('Backend.Package.edit', ['data' => $package]);
     }
 
     public function update(Request $request, $id)
@@ -153,6 +153,6 @@ class PackageController extends Controller
     {
         $features = Feature::all();
         $package_features = Package::find($id);
-        return view('SuperAdmin.Package.features', ['features' => $features, 'package_features' => $package_features]);
+        return view('Backend.Package.features', ['features' => $features, 'package_features' => $package_features]);
     }
 }
