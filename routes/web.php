@@ -24,6 +24,10 @@ use App\Http\Controllers\FeatureController;
 //=========================FRONTEND ROUTE=================================//
 
 Route::get('/', [FrontlandingController::class, 'index'])->name('landing');
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('config:cache');
+    return 'DONE'; //Return anything
+});
 
 //=========================BACKEND ROUTE=================================//
 
