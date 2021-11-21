@@ -6,9 +6,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-  <title>Hajatan - Super Admin Room</title>
+  <title>mbojo - Super Admin Room</title>
   <!-- Favicon -->
-  <link rel="icon" href="{{asset('assets/img/brand/logo-01.png')}}" type="image/png">
+  <link rel="icon" href="{{asset('assets/img/brand/logo.png')}}" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->

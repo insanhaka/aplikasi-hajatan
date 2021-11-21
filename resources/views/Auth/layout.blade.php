@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Hello</title>
+	<title>Selamat Datang - Mbojo - Digital Wedding Invitation</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{{asset('assets/login-assets/images/icons/favicon.ico')}}"/>
+<link rel="icon" href="{{asset('assets/img/brand/logo.png')}}" type="image/png">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('assets/login-assets/vendor/bootstrap/css/bootstrap.min.css')}} ">
 <!--===============================================================================================-->
