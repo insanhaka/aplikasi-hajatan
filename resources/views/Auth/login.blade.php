@@ -16,7 +16,7 @@
 
                 
                 <div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required">
-                    <input class="input100" type="text" name="username" placeholder="Username">
+                    <input class="input100" type="text" name="username" placeholder="Username / Email">
                     <span class="focus-input100"></span>
                 </div>
                 
@@ -26,13 +26,25 @@
                     <span class="focus-input100"></span>
                 </div>
 
+                <div class="captcha" style="margin-bottom: 20px">
+                    <span>{!! captcha_img() !!}</span>
+                    <button type="button" class="btn" style="background-color: #d1d8e0" class="reload" id="reload">
+                    &#x21bb;
+                    </button>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-16" data-validate = "Captcha is required">
+                    <input class="input100" type="text" id="captcha" name="captcha" placeholder="Ketikan Captcha">
+                    <span class="focus-input100"></span>
+                </div>
+
                 <div class="container-login100-form-btn m-t-17">
                     <button class="login100-form-btn" type="submit" >
                         Login
                     </button>
                 </div>
 
-                <div class="container" style="margin-top: 5%;">
+                {{-- <div class="container" style="margin-top: 5%;">
                     <div class="row">
                         <div class="col-md-8">
                             <p>Don't have account?</p>
@@ -41,7 +53,7 @@
                             <a href="/signup"><p style="color: #546de5; font-weight: bold;">Sign Up</p></a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </form>
         </div>
@@ -63,14 +75,27 @@
                     });
     @endif
 </script>
+
 <script type="text/javascript">
     @if ($message = Session::get('error'))
             iziToast.error({
                         title: 'Failed',
-                        message: 'Username dan password tidak cocok',
+                        message: '{{$message}}',
                         position: 'topRight'
                     });
     @endif
+</script>
+
+<script type="text/javascript">
+    $('#reload').click(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/reload-captcha',
+            success: function (data) {
+                $(".captcha span").html(data.captcha);
+            }
+        });
+    });
 </script>
 
 @endsection

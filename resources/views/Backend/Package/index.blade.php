@@ -8,17 +8,20 @@
 <!-- Page content -->
 <div class="container-fluid" style="margin-top: 3%; margin-bottom: 6%;">
 
-    <div class="card">
-        <div class="card-header">
+    <div class="card" style="border-left-width: 10px; border-left-color: #546de5; border-left-style: solid">
+        <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="text-primary">Data Package</h2>
                 </div>
                 <div class="col-md-6 text-right">
-                    <a class="btn btn-primary" href="/dapur/package/add" role="button">Add Data</a>
+                    <a class="btn btn-primary" href="/dapur/package/add" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah</a>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="card">
         <div class="card-body">
             <table id="package-datatable" class="table table-striped table-bordered display responsive nowrap" style="width:100%">
                 <thead class="bg-primary" style="color: #ffff;">

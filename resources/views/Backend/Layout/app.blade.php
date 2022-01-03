@@ -32,6 +32,9 @@
 
   <link rel="stylesheet" href="{{asset('assets/css/froala-editor.css')}}">
 
+  <link href="{{asset('assets/MCDatepicker/dist/mc-calendar.min.css')}}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="{{asset('assets/css/timepicker.css')}}">
+
   <style>
     #preloader {
       position: fixed;
@@ -107,6 +110,9 @@
   <script src="{{ asset('assets/Krajee-file-input/themes/explorer-fa/theme.js') }}"></script>
   <script src="{{ asset('assets/Krajee-file-input/themes/gly/theme.js') }}"></script>
   <script src="{{ asset('assets/js/froala-editor.js') }}"></script>
+
+  <script src="{{asset('assets/MCDatepicker/dist/mc-calendar.min.js')}}" type="text/javascript"></script>
+  <script src="{{asset('assets/js/timepicker.js')}}"></script>
 
   @yield('js')
 </body>

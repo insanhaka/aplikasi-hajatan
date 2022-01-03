@@ -16,28 +16,48 @@ class AuthorizeController extends Controller
 
     public function postlogin(Request $request)
     {
+        $messages = [
+            'captcha.required' => 'Captcha diisi dong..',
+            'captcha.captcha' => 'Captcha kurang tepat..',
+        ];
 
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password]))
+        $validator = Validator::make( $request->all(), [
+            'captcha' => ['required','captcha'],
+        ], $messages );
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->errors()->first());
+        }
+
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password]) || Auth::attempt(['email' => $request->username, 'password' => $request->password]))
         {
-            $user = User::where('username', $request->username)->first();
-            $user_activation =  $user->is_active;
-            $user_role =  $user->roles_id;
+            // $user = User::where('username', $request->username)->first();
+            // $user_activation =  $user->is_active;
 
-            if ($user_activation == 1 && $user_role !== 3)
+            $user_activation = Auth::user()->is_active;
+
+            if ($user_activation == 1)
             {
+                // $token = $user->createToken('userToken')->accessToken;
                 return redirect()->route('home');
             }
             else
             {
+                Auth::logout();
                 return redirect()->route('notactive');
             }
         }
         else
         {
             return redirect()->route('login')
-            ->with('error','Email/Password yang anda masukan salah');
+            ->with('error','Username/Email dan Password yang anda masukan salah');
         }
 
+    }
+
+    public function reloadCaptcha()
+    {
+        return response()->json(['captcha'=> captcha_img()]);
     }
 
     public function logout()

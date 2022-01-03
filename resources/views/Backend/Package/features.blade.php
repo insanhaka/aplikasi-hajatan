@@ -8,14 +8,18 @@
 <!-- Page content -->
 <div class="container-fluid" style="margin-top: 3%; margin-bottom: 6%;">
 
-    <div class="card">
-        <div class="card-header">
+    <div class="card" style="border-left-width: 10px; border-left-color: #546de5; border-left-style: solid">
+        <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="text-primary">Data Feature Package {{ $package_features->name }}</h2>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="card">
+        <br>
         <div class="card-body">
             <table id="package-datatable" class="table table-striped table-bordered display responsive nowrap" style="width:100%">
                 <thead class="bg-primary" style="color: #ffff;">
@@ -30,8 +34,8 @@
                             <td>{{ $feature->name }}</td>
                             <td>
                                 <input type="checkbox" class="checkboxes" name="feature" onchange="saveFeature({{ $feature->id }})" id="{{ $feature->id }}" value="{{ $feature->id }}" switch="none" @if ($package_features->features->contains('id',$feature->id))
-                                            checked
-                                        @endif />
+                                    checked
+                                @endif />
                             </td>
                         </tr>
                     @endforeach
@@ -44,6 +48,12 @@
 @endsection
 
 @section('js')
+
+<script>
+    $(document).ready(function() {
+        $("#package").addClass("active");
+    });
+</script>
 
 <script type="text/javascript">
     @if ($message = Session::get('updated'))
@@ -94,7 +104,11 @@
             data: post,
             cache: false,
             success: function (data) {
-                alert('data updated');
+                iziToast.success({
+                        title: 'Success',
+                        message: 'Data berhasil diperbaharui',
+                        position: 'topRight'
+                    });
                 return data;
             },
             error: function () {

@@ -24,10 +24,10 @@ use App\Http\Controllers\FeatureController;
 //=========================FRONTEND ROUTE=================================//
 
 Route::get('/', [FrontlandingController::class, 'index'])->name('landing');
-Route::get('/clear-cache', function() {
-    $exitCode = Artisan::call('config:cache');
-    return 'DONE'; //Return anything
-});
+// Route::get('/clear-cache', function() {
+//     $exitCode = Artisan::call('config:cache');
+//     return 'DONE'; //Return anything
+// });
 
 //=========================BACKEND ROUTE=================================//
 
@@ -36,6 +36,8 @@ Route::post('/postlogin', [AuthorizeController::class, 'postlogin']);
 Route::get('/signup', [AuthorizeController::class, 'signup'])->name('signup');
 Route::post('/postsignup', [AuthorizeController::class, 'postsignup']);
 Route::get('/notactive', [AuthorizeController::class, 'notactive'])->name('notactive');
+
+Route::get('/reload-captcha', [AuthorizeController::class, 'reloadCaptcha']);
 
 Route::group(['prefix' => 'dapur', 'middleware' => 'auth'], function () {
 

@@ -8,10 +8,18 @@
 <!-- Page content -->
 <div class="container-fluid" style="margin-top: 3%; margin-bottom: 6%;">
 
-    <div class="card">
-        <div class="card-header">
-          <h2 class="text-primary">Add Feature Data</h2>
+    <div class="card" style="border-left-width: 10px; border-left-color: #546de5; border-left-style: solid">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="text-primary">Tambah Data</h2>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <div class="card">
+        <br>
         <div class="card-body">
             <form method="POST" action="/dapur/feature/create">
                 {{ csrf_field() }}
